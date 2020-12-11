@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html >
+<head>
+    <meta charset="utf-8" />
+    <title>图片背景透明 内容不透明</title>
+    <script src="../api/vue.min.js"></script>
+</head>
+<body>
+    <style>
+        html{
+            height:100%;/*给html 增加宽高100% body 的背景图片才能充满屏幕 不然height为0*/
+            width:100%;
+        }
+        body {
+            background-image: url('../images/lajiao.png');   
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            
+        }
+        .bgimage::before {
+            content: ''; /*必须要有，才能显示背景*/
+            text-align: center; 
+            background-color: rgba(255,255,255,0.3);
+            background-image: url('../images/Screenshot_1.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 740px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -200px;
+            margin-left: -370px;
+            border-radius: 10px;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .bgimage {
+            display: inline-block;
+            text-align: center;
+            width: 740px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -200px;
+            margin-left: -370px;
+            border-radius: 10px;
+        }
+        .text_in {
+            width: 300px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid #808080;
+            opacity: 1;
+        }
+    </style>
+    <div>
+        <div class="bgimage" id="big_line">
+            <div style="margin-top:50px">
+                <input class="text_in" />
+            </div>
+            <div style="margin-top:20px">
+                <input class="text_in" />
+            </div>
+
+
+        </div>
+    </div>
+</body>
+</html>

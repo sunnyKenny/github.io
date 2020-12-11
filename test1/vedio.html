@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>视频播放</title>
+    <style type="text/css">
+        .main{
+            text-align:center;
+        }
+        .video-btn {
+            position: absolute;
+            width: 1080px;
+            height: 500px;
+            background: black;
+            top: 50px;
+            left: 0px;
+            right: 0px;
+            margin: 0 auto;
+            display: none;
+            z-index: 101;
+        }
+
+        .video-area {
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-shut {
+            height: 25px;
+            width: 25px;
+            border-radius: 12.5px;
+            font-size: medium;
+            color: black;
+            float: left;
+            text-align: center;
+            font-weight: bolder;
+            background: white;
+            display: block;
+            position: absolute;
+            top: -15px;
+            right: -15px;
+        }
+
+        #shadow {
+            position: absolute;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: black;
+            z-index: 100;
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="big-line" class="main">
+        <div class="main" style="height: 100px;margin-top: 100px;">
+            <a href="javascript:;" class="video" id="video"><img src="http://i1.hdslb.com/bfs/archive/62915c7879fb3149bd8e21fb6e3c06749b7b40b2.jpg@160w_100h.webp"></a>
+        </div>
+        <div class="video-btn" id="video-btn">
+            <div class="video-area" id="video-area"></div>
+            <a class="video-shut" id="video-shut">×</a>
+        </div>
+        <div id="shadow"></div>
+  </div>
+</body>
+</html>
+<script type="text/javascript">
+
+  var obtn=document.getElementById('video');
+  var ovideo=document.getElementById('video-btn');
+  var oatn=document.getElementById('video-area');
+  var oshut=document.getElementById('video-shut');
+  var oshadow=document.getElementById('shadow');
+  obtn.onclick=function () {
+    ovideo.style.display='block';
+    oshadow.style.display='block';
+    oatn.innerHTML='<iframe src="http://player.bilibili.com/player.html?aid=6117110&cid=9931722&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>';
+  }
+  oshut.οnclick= function () {
+    ovideo.style.display='none';
+    oshadow.style.display='none';
+    oatn.innerHTML="";
+  }
+</script>

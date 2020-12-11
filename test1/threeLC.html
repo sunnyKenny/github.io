@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>三级分类</title>
+    <script src="../api/vue.min.js"></script>
+    <script src="../api/jquery.min.js"></script>
+</head>
+<body>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,1);
+        }
+
+        body {
+        }
+
+        .ndiv {
+            text-align: center;
+            width: auto;
+            height: 30px;
+            line-height: 30px;
+            background-color: rgba(255,255,255,1);
+            margin: 4px;
+            border-radius: 5px;
+            display: inline-flex;
+            padding: 3px;
+        }
+
+        #selectedblock {
+            display: block;
+            flex-direction: row;
+            width: 100%;
+            border: 1px solid rgba(21,0,255,1);
+            border-radius: 5px;
+            height: 400px
+        }
+
+        #selectblock {
+            border: 1px solid rgba(21,0,255,1);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            margin: 4px 0px 0px 0px;
+        }
+
+        .leveblock {
+            display: inline-flex;
+            float: left;
+        }
+
+        .selectdiv {
+            text-align: center;
+            width: fit-content;
+            height: 30px;
+            line-height: 30px;
+            background-color: rgba(21,0,255,1);
+            margin: 4px;
+            border-radius: 5px;
+            display: inline-block;
+            padding: 3px;
+        }
+
+        .selectFlag {
+            display: none
+        }
+    </style>
+
+
+
+    <div id="app">
+
+        <div id="selectedblock">
+            <div class="selectdiv" v-for="(item,index) in selectedD">
+                <img src="../images/backico.png" style="width:8px;height:8px;float:right" v-on:click="del(item,index)"/>
+                {{item.nameThr}}
+            </div>
+        </div>
+
+        <div id="selectblock">
+            <div class="leveblock">
+                <div  v-for="(item,index) in fData" v-on:click="selectCategory1(item)">
+                    <div class="selectdiv" v-if="(item.select==='1')">
+                        {{item.nameOne}}
+                    </div>
+                    <div class="ndiv" v-if="(item.select === '0')">
+                        {{item.nameOne}}
+                    </div>
+                    <div class="selectFlag">{{item.select}}</div>
+                </div>
+            </div>
+            <div class="leveblock">
+                <div  v-for="(item,index) in sData" v-on:click="selectCategory2(item)">
+                    <div class="selectdiv" v-if="(item.select==='1')">
+                        {{item.nameTwo}}
+                    </div>
+                    <div class="ndiv" v-if="(item.select === '0')">
+                        {{item.nameTwo}}
+                    </div>
+                    <div class="selectFlag">{{item.select}}</div>
+                </div>
+            </div>
+
+            <div class="leveblock">
+                <div  v-for="(item,index) in tData" v-on:click="selectCategory3(item)">
+                    <div class="selectdiv" v-if="(item.select==='1')">
+                        {{item.nameThr}}
+                    </div>
+                    <div class="ndiv" v-if="(item.select === '0')">
+                        {{item.nameThr}}
+                    </div>
+                    <div class="selectFlag">{{item.select}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                fData: [{
+                    'nameOne': '动物',
+                    'info': [{
+                        'nameTwo': '哺乳类',
+                        'info': [{ 'nameThr': '金丝猴' }, { 'nameThr': '大熊猫' }, { 'nameThr': '娃娃鱼' }]
+                    }, {
+                        'nameTwo': '节肢类',
+                        'info': [{ 'nameThr': '螃蟹' }, { 'nameThr': '蚂蚱' }, { 'nameThr': '蜻蜓' }]
+                    }]
+                },
+                {
+                    'nameOne': '植物',
+                    'info': [{
+                        'nameTwo': '被子植物',
+                        'info': [{ 'nameThr': '桃树' }, { 'nameThr': '蒲公英' }, { 'nameThr': '橡树' }]
+                    }, {
+                        'nameTwo': '藻类',
+                        'info': [{ 'nameThr': '海带' }, { 'nameThr': '紫菜' }, { 'nameThr': '蓝藻' }]
+                    }]
+                }
+                ],
+                sData: [],
+                tData: [],
+                selectedD: []
+            },
+            created: function () {
+
+                for (var i = 0; i < this.fData.length; i++) {
+                    Vue.set(this.fData[i], 'select', '0');
+                }
+                console.log(this.fData);
+            },
+            methods: {
+                selectCategory1: function (item) {
+
+                    this.sData = item.info;
+
+                    for (var i = 0; i < this.sData.length; i++) {
+                        Vue.set(this.sData[i], 'select', '0');
+                    }
+                    for (var i = 0; i < this.fData.length; i++) {
+                        this.fData[i].select = '0';
+                    }
+                    item.select = '1';
+                    this.selectCategory2(this.sData[0]);
+                },
+                selectCategory2: function (item) {
+                    this.tData = item.info;
+                    if (!(this.tData[0].select)) {
+                        for (var i = 0; i < this.tData.length; i++) {
+                            Vue.set(this.tData[i], 'select', '0');
+                        }
+                    }
+                    for (var i = 0; i < this.sData.length; i++) {
+                        this.sData[i].select = '0';
+                    }
+                    item.select = '1';
+                },
+                selectCategory3: function (item) {
+                    if (item.select === '1') {
+                        item.select = '0';
+                    } else { item.select = '1'; }
+
+                    var arr = [];
+                    for (var i = 0; i < this.fData.length; i++) {
+                        for (var o = 0; o < this.fData[i].info.length; o++) {
+                            console.log(this.fData[i].info[o]);
+                            for (var p = 0; p < this.fData[i].info[o].info.length; p++) {
+
+                                if (this.fData[i].info[o].info[p].select === '1') {
+                                    arr.push(this.fData[i].info[o].info[p]);
+                                }
+                            }
+                        }
+                    }
+                    this.selectedD = arr;
+
+                },
+                del: function (item, index) {
+
+                    this.selectedD.splice(index, 1);
+
+                    for (var i = 0; i < this.fData.length; i++) {
+                        for (var o = 0; o < this.fData[i].info.length; o++) {
+                            console.log(this.fData[i].info[o]);
+                            for (var p = 0; p < this.fData[i].info[o].info.length; p++) {
+
+                                if (this.fData[i].info[o].info[p].nameThr === item.nameThr) {
+
+                                    this.fData[i].info[o].info[p].select = '0';
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            computed: {
+
+            },
+            watch: {
+            },
+            filters: {
+            }
+        });
+
+    </script>
+</body>
+</html>
