@@ -3,44 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>目录</title>
+    <title>测试</title>
 
-<script src="api/vue.min.js"></script>
 </head>
 <body>
 
     <div id="app" >
-      <ul id="Dir" >
-          <li  v-for="(item,index) in fileDirectory"> <a :href= "'http://localhost:1337/test1/' +item.fileName" > {{item.name}}</a></li>
-      </ul>
+  Holle word
     </div>
-    <script>
-      
-
-    </script>
-
-    <script>
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                fileDirectory: [{ name: 'v-if.html', fileName: 'v-if.html' },
-                    { name: 'v-for.html', fileName: 'v-for.html' },
-                    { name: 'vedio.html', fileName: 'vedio.html' }, 
-                    { name: 'test.html', fileName: 'test.html' },
-                    { name: 'threeLC.html', fileName: 'threeLC.html' },
-                    { name: 'iframe_videobili.html', fileName: 'iframe_videobili.html' },
-                    { name: 'baidu-trans-api.html', fileName: 'baidu-trans-api.html' },
-                    { name: 'b_image_trans.html', fileName: 'b_image_trans.html' },
-                    { name: 'axiosTest.html', fileName: 'axiosTest.html' },
-                    { name: 'upload.html', fileName: 'upload.html' }
-            ]
-            },
-            methods: {
-            }
-        }
-        )
-    </script>
-        
+ 
 
 </body>
 
